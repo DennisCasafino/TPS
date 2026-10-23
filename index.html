@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repository TPS - Esercitazioni HTML</title>
+    <!-- Tailwind CSS CDN per una grafica moderna e veloce -->
+    <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Header / Navbar -->
+    <header class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-wide">TPS Laboratorio</h1>
+            <a href="#" id="github-link" class="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-lg text-sm font-medium transition duration-200">
+                Vedi su GitHub
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12 flex-grow max-w-4xl">
+        <!-- Presentazione -->
+        <div class="mb-12 text-center md:text-left">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Indice delle Esercitazioni</h2>
+            <p class="text-gray-600 text-lg">Raccolta dei progetti, laboratori ed esercizi di HTML sviluppati per la materia di Tecnologie e Progettazione di Sistemi.</p>
+        </div>
+
+        <!-- Griglia dei link / Esercizi -->
+        <div class="grid gap-6 md:grid-cols-2">
+            
+            <!-- Esercizio 1 (Esempio) -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-200">
+                <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">Lab 1</span>
+                <h3 class="text-xl font-bold mt-2 text-gray-800">Struttura Base e Tag</h3>
+                <p class="text-gray-500 text-sm mt-1 mb-4">Primo approccio con l'HTML, gestione dei testi, titoli e paragrafi.</p>
+                <a href="esercizio1/index.html" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center text-sm">
+                    Apri esercizio &rarr;
+                </a>
+            </div>
+
+            <!-- Esercizio 2 (Esempio) -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-200">
+                <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded">Lab 2</span>
+                <h3 class="text-xl font-bold mt-2 text-gray-800">Form e Tabelle</h3>
+                <p class="text-gray-500 text-sm mt-1 mb-4">Creazione di moduli di input dati e strutturazione di tabelle informative.</p>
+                <a href="esercizio2/index.html" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center text-sm">
+                    Apri esercizio &rarr;
+                </a>
+            </div>
+
+            <!-- Esercizio 3 (Aggiungine altri duplicando questo blocco) -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-200">
+                <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-1 rounded">Lab 3</span>
+                <h3 class="text-xl font-bold mt-2 text-gray-800">Layout e Sezioni</h3>
+                <p class="text-gray-500 text-sm mt-1 mb-4">Uso dei tag semantici (header, nav, section, footer) per la struttura della pagina.</p>
+                <a href="esercizio3/index.html" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center text-sm">
+                    Apri esercizio &rarr;
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-6 mt-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2026 - Repository di TPS. Creato per scopi didattici.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
