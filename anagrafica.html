@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Gabbia Grafica e Tabella Dinamica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Inserimento Dati</h2>
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" placeholder="Inserisci il nome">
+        </div>
+        <div class="form-group">
+            <label for="cognome">Cognome:</label>
+            <input type="text" id="cognome" placeholder="Inserisci il cognome">
+        </div>
+        <div class="form-group">
+            <label for="indirizzo">Indirizzo:</label>
+            <input type="text" id="indirizzo" placeholder="Inserisci l'indirizzo">
+        </div>
+        <div class="form-group">
+            <label for="citta">Città:</label>
+            <input type="text" id="citta" placeholder="Inserisci la città">
+        </div>
+        <div class="form-group">
+            <label for="eta">Età:</label>
+            <input type="number" id="eta" placeholder="Inserisci l'età">
+        </div>
+        <button onclick="aggiungiRiga()">Aggiungi alla Tabella</button>
+    </div>
+    <h2>Tabella Dati</h2>
+    <table id="tabellaDati">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Indirizzo</th>
+                <th>Città</th>
+                <th>Età</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        function aggiungiRiga() {
+            var nome = document.getElementById("nome").value;
+            var cognome = document.getElementById("cognome").value;
+            var indirizzo = document.getElementById("indirizzo").value;
+            var citta = document.getElementById("citta").value;
+            var eta = document.getElementById("eta").value;
+            if (nome === "" || cognome === "") {
+                alert("Per favore, compila almeno Nome e Cognome!");
+                return;
+            }
+            var table = document.getElementById("tabellaDati");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            cell1.innerHTML = nome;
+            cell2.innerHTML = cognome;
+            cell3.innerHTML = indirizzo;
+            cell4.innerHTML = citta;
+            cell5.innerHTML = eta;
+            document.getElementById("nome").value = "";
+            document.getElementById("cognome").value = "";
+            document.getElementById("indirizzo").value = "";
+            document.getElementById("citta").value = "";
+            document.getElementById("eta").value = "";
+        }
+    </script>
+</body>
+</html>
