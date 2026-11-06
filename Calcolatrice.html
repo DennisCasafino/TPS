@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semi-Calcolatrice - Esercizio 4A</title>
+    <title>Semi-Calcolatrice a Stringa - Esercizio 4A</title>
     <style>
         * {
             box-sizing: border-box;
@@ -29,7 +29,7 @@
             text-align: center;
             margin-bottom: 20px;
             color: #333;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
         .inputs-group {
             display: flex;
@@ -45,14 +45,13 @@
             border-radius: 8px;
             outline: none;
             text-align: right;
-            transition: border-color 0.3s;
         }
         .inputs-group input:focus {
-            border-color: #007bff;
+            border-color: #e67e22;
         }
         .tastiera-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 colonne per le 4 operazioni */
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             margin-bottom: 20px;
         }
@@ -63,28 +62,24 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
             background-color: #f8f9fa;
             color: #333;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s;
         }
         .btn:hover {
             background-color: #e2e6ea;
         }
-        .btn:active {
-            transform: scale(0.95);
-        }
         .btn.attivo {
-            background-color: #007bff;
+            background-color: #e67e22;
             color: white;
         }
         .btn-uguale {
             grid-column: span 4;
-            background-color: #28a745;
+            background-color: #2ecc71;
             color: white;
         }
         .btn-uguale:hover {
-            background-color: #218838;
+            background-color: #27ae60;
         }
         .risultato-box {
             margin-top: 15px;
@@ -92,82 +87,76 @@
             background-color: #f1f3f5;
             border-radius: 8px;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: #495057;
             min-height: 54px;
-            border-left: 5px solid #007bff;
+            border-left: 5px solid #e67e22;
+            word-break: break-all; 
         }
     </style>
 </head>
 <body>
 
     <div class="calcolatrice-container">
-        <h2>Semi-Calcolatrice v1.0</h2>
+        <h2>Semi-Calcolatrice (String-Mode)</h2>
+        
         <div class="inputs-group">
-            <input type="text" id="num1" placeholder="Inserisci primo numero">
-            <input type="text" id="num2" placeholder="Inserisci secondo numero">
+            <input type="text" id="num1" placeholder="Primo numero">
+            <input type="text" id="num2" placeholder="Secondo numero">
         </div>
         <div class="tastiera-grid">
-            <button class="btn btn-op" onclick="impostaOperazione('+', this)">+</button>
-            <button class="btn btn-op" onclick="impostaOperazione('-', this)">-</button>
-            <button class="btn btn-op" onclick="impostaOperazione('*', this)">*</button>
-            <button class="btn btn-op" onclick="impostaOperazione('/', this)">/</button>
+            <button class="btn btn-op" onclick="componiStringa('+', this)">+</button>
+            <button class="btn btn-op" onclick="componiStringa('-', this)">-</button>
+            <button class="btn btn-op" onclick="componiStringa('*', this)">*</button>
+            <button class="btn btn-op" onclick="componiStringa('/', this)">/</button>
             
-            <button class="btn btn-uguale" onclick="calcola()">=</button>
+            <button class="btn btn-uguale" onclick="eseguiEspressione()">=</button>
         </div>
         <div class="risultato-box" id="output">
-            Risultato: --
+            In attesa...
         </div>
     </div>
-    <script>
-        let operazioneSelezionata = null;
-        function impostaOperazione(op, bottoneCliccato) {
-            operazioneSelezionata = op;
-            let bottoni = document.querySelectorAll('.btn-op');
-            bottoni.forEach(btn => btn.classList.remove('attivo'));
-            bottoneCliccato.classList.add('attivo');
-        }
-        function calcola() {
-            let val1 = parseFloat(document.getElementById('num1').value);
-            let val2 = parseFloat(document.getElementById('num2').value);
-            let display = document.getElementById('output');
-            if (isNaN(val1) || isNaN(val2)) {
-                display.innerHTML = "Errore: Inserisci numeri validi!";
-                display.style.borderLeftColor = "#dc3545";
-                return;
-            }
-            if (operazioneSelezionata === null) {
-                display.innerHTML = "Scegli un'operazione!";
-                display.style.borderLeftColor = "#ffc107";
-                return;
-            }
 
-            let risultato = 0;
-            switch (operazioneSelezionata) {
-                case '+':
-                    risultato = val1 + val2;
-                    break;
-                case '-':
-                    risultato = val1 - val2;
-                    break;
-                case '*':
-                    risultato = val1 * val2;
-                    break;
-                case '/':
-                    if (val2 === 0) {
-                        display.innerHTML = "Errore: Div per 0!";
-                        display.style.borderLeftColor = "#dc3545";
-                        return;
-                    }
-                    risultato = val1 / val2;
-                    break;
-                default:
-                    display.innerHTML = "Operazione non valida";
-                    return;
+    <script>
+        let operatoreScelto = "";
+        function componiStringa(operatore, bottone) {
+            operatoreScelto = operatore;
+            let bottoni = document.querySelectorAll('.btn-op');
+            bottoni.forEach(b => b.classList.remove('attivo'));
+            bottone.classList.add('attivo');
+        }
+        function eseguiEspressione() {
+            let txt1 = document.getElementById("num1").value.trim();
+            let txt2 = document.getElementById("num2").value.trim();
+            let display = document.getElementById("output");
+            if (txt1 === "" || txt2 === "") {
+                display.innerHTML = "Errore: Campi vuoti!";
+                return;
             }
-            display.innerHTML = "Risultato: " + risultato;
-            display.style.borderLeftColor = "#28a745"; 
+            if (operatoreScelto === "") {
+                display.innerHTML = "Errore: Scegli l'operazione!";
+                return;
+            }
+            txt1 = txt1.replace(',', '.');
+            txt2 = txt2.replace(',', '.');
+
+            if (isNaN(txt1) || isNaN(txt2)) {
+                display.innerHTML = "Errore: Dati non numerici!";
+                return;
+            }
+            if (operatoreScelto === "/" && parseFloat(txt2) === 0) {
+                display.innerHTML = "Errore: Divisione per 0!";
+                return;
+            }
+            let espressioneCompleta = txt1 + " " + operatoreScelto + " " + txt2;
+            try {
+                let calcolatore = new Function("return " + espressioneCompleta);
+                let risultato = calcolatore();
+                display.innerHTML = "Espressione: " + espressioneCompleta + "<br>Risultato: " + risultato;
+            } catch (errore) {
+                display.innerHTML = "Errore nel calcolo della stringa";
+            }
         }
     </script>
 </body>
