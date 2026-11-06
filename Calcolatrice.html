@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semi-Calcolatrice - Esercizio 4A</title>
     <style>
-        /* Reset e Font di base */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
             background-color: #f0f2f5;
             display: flex;
@@ -20,8 +18,6 @@
             align-items: center;
             height: 100vh;
         }
-
-        /* Container principale predisposto per ampliamenti futuri */
         .calcolatrice-container {
             background-color: #ffffff;
             padding: 25px;
@@ -29,22 +25,18 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             width: 350px;
         }
-
         h2 {
             text-align: center;
             margin-bottom: 20px;
             color: #333;
             font-size: 1.4rem;
         }
-
-        /* Sezione Input */
         .inputs-group {
             display: flex;
             flex-direction: column;
             gap: 10px;
             margin-bottom: 20px;
         }
-
         .inputs-group input {
             width: 100%;
             padding: 12px;
@@ -55,21 +47,15 @@
             text-align: right;
             transition: border-color 0.3s;
         }
-
         .inputs-group input:focus {
             border-color: #007bff;
         }
-
-        /* Layout Grafico Scalabile (Grid)
-           In futuro basterà aumentare le righe/colonne per aggiungere tasti numerici */
         .tastiera-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr); /* 4 colonne per le 4 operazioni */
             gap: 10px;
             margin-bottom: 20px;
         }
-
-        /* Stile dei bottoni */
         .btn {
             padding: 15px;
             font-size: 1.2rem;
@@ -82,33 +68,24 @@
             color: #333;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-
         .btn:hover {
             background-color: #e2e6ea;
         }
-
         .btn:active {
             transform: scale(0.95);
         }
-
-        /* Evidenzia il tasto dell'operazione selezionata */
         .btn.attivo {
             background-color: #007bff;
             color: white;
         }
-
-        /* Tasto Uguale esteso su tutte e 4 le colonne (predisposto per il fondo della calcolatrice) */
         .btn-uguale {
             grid-column: span 4;
             background-color: #28a745;
             color: white;
         }
-
         .btn-uguale:hover {
             background-color: #218838;
         }
-
-        /* Area di Stampa del Risultato */
         .risultato-box {
             margin-top: 15px;
             padding: 15px;
@@ -127,14 +104,10 @@
 
     <div class="calcolatrice-container">
         <h2>Semi-Calcolatrice v1.0</h2>
-        
-        <!-- Input di tipo text come richiesto -->
         <div class="inputs-group">
             <input type="text" id="num1" placeholder="Inserisci primo numero">
             <input type="text" id="num2" placeholder="Inserisci secondo numero">
         </div>
-
-        <!-- Griglia dei bottoni espandibile -->
         <div class="tastiera-grid">
             <button class="btn btn-op" onclick="impostaOperazione('+', this)">+</button>
             <button class="btn btn-op" onclick="impostaOperazione('-', this)">-</button>
@@ -143,44 +116,27 @@
             
             <button class="btn btn-uguale" onclick="calcola()">=</button>
         </div>
-
-        <!-- Zona di stampa finale -->
         <div class="risultato-box" id="output">
             Risultato: --
         </div>
     </div>
-
     <script>
-        // Variabile globale per salvare l'operazione scelta, stile programmazione strutturata
         let operazioneSelezionata = null;
-
-        // Funzione associata ai 4 tasti delle operazioni
         function impostaOperazione(op, bottoneCliccato) {
             operazioneSelezionata = op;
-
-            // Rimuovo la classe 'attivo' da tutti i bottoni per poi metterla solo a quello cliccato
             let bottoni = document.querySelectorAll('.btn-op');
             bottoni.forEach(btn => btn.classList.remove('attivo'));
-            
-            // Feedback visivo del tasto selezionato
             bottoneCliccato.classList.add('attivo');
         }
-
-        // Funzione associata al quinto tasto (Uguale) per la stampa
         function calcola() {
-            // Recupero i valori dai text input e faccio il casting (parsing)
             let val1 = parseFloat(document.getElementById('num1').value);
             let val2 = parseFloat(document.getElementById('num2').value);
             let display = document.getElementById('output');
-
-            // Validazione input di base (is-not-a-number)
             if (isNaN(val1) || isNaN(val2)) {
                 display.innerHTML = "Errore: Inserisci numeri validi!";
                 display.style.borderLeftColor = "#dc3545";
                 return;
             }
-
-            // Controllo se è stata scelta un'operazione
             if (operazioneSelezionata === null) {
                 display.innerHTML = "Scegli un'operazione!";
                 display.style.borderLeftColor = "#ffc107";
@@ -188,8 +144,6 @@
             }
 
             let risultato = 0;
-
-            // Switch case per gestire la logica delle 4 operazioni principali
             switch (operazioneSelezionata) {
                 case '+':
                     risultato = val1 + val2;
@@ -201,7 +155,6 @@
                     risultato = val1 * val2;
                     break;
                 case '/':
-                    // Controllo divisione per zero
                     if (val2 === 0) {
                         display.innerHTML = "Errore: Div per 0!";
                         display.style.borderLeftColor = "#dc3545";
@@ -213,10 +166,8 @@
                     display.innerHTML = "Operazione non valida";
                     return;
             }
-
-            // Stampa del risultato finale nell'HTML
             display.innerHTML = "Risultato: " + risultato;
-            display.style.borderLeftColor = "#28a745"; // Verde successo
+            display.style.borderLeftColor = "#28a745"; 
         }
     </script>
 </body>
